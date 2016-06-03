@@ -1,0 +1,33 @@
+{
+  "name": "node-js-mongodb",
+  "version": "0.0.1",
+  "description": "CRUD em node com express, mongoose e ejs",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "ejs": "2.4.1",
+    "express": "4.13.3",
+    "mongodb":"*",
+    "mongoose":"*",
+    "body-parser":"*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.heroku.com/perguntasanonimas01.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "mongodb",
+    "mongoose",
+    "express",
+    "javascript",
+    "ejs"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,69 @@
+<% include partials/header %>
+<%
+	/*função auxiliar usada pela questão e respostas no arquivo /partials/answers.ejs*/
+	var maskIp = function(str){
+		var ipAddr = str.split('.');
+		ipAddr[1] = 'xxx';
+		ipAddr[2] = 'xxx';
+		return ipAddr.join('.');
+	}
+%>
+	<div class="container">
+		<%if(list == true){%>
+			<div class="page-header clearfix">
+				<h1 class="pull-left">Perguntas</h1>
+				<div class="pull-right">
+					<br><a href="//<%=request.headers.host%>/insert" class="btn btn-primary">Inserir</a>
+				</div>
+			</div>
+			<%if(data.length > 0){
+			%>
+				<ul class="list-group">
+				<%
+					data.map(function(q){
+					%>
+						<li class="list-group-item clearfix" data-type="question">
+							<span class="col-md-11">
+								<a style="font-size: 20px;line-height: 30px;" href="//<%=request.headers.host+'/get/'+q._id%>">
+									<strong><%=q.question%></strong>
+								</a>				
+								&nbsp;&nbsp;<span class="badge "><%=q.totalAnswers%></span>
+							</span>
+							<span class="col-md-1 text-right">
+								<a data-id="<%=q._id%>" class="remove glyphicon glyphicon-trash btn btn-danger" alt="Remover"><span style="display:none;">Remover</span></a>
+							</span>
+						</li>
+					<%
+				})%>
+				</ul>
+			<%}else{%>
+				Não há perguntas cadastradas.
+			<%}%>
+		<%}else{%>
+			<div class="clearfix">
+				<div class="page-header clearfix">
+					<h1 class="pull-left">
+						<%=data.question%>
+					</h1>
+					<a href="./" class="pull-right"><br><br>Voltar</a>
+				</div>
+				<small class="pull-left">Por <strong><%=maskIp(data.ip)%></strong> em <strong><%=data.date%></strong></small>
+			</div><br>
+			
+			<% include partials/answers%>
+
+			<br><form action="http://<%=request.headers.host%>/answer%>" method="POST">
+				<legend>
+					Preencha o campo abaixo com uma resposta
+				</legend>
+				<fieldset>
+					<input type="hidden" value="<%=request.params.id%>" name="question"> 
+					<textarea class="form-control" autofocus name="answer"></textarea>
+				</fieldset>
+				<br>
+				<button type="submit" class="pull-right btn btn-primary">Enviar</button>				
+			</form>
+			
+		<%}%>
+	</div><br><br><br><br>
+<% include partials/footer %>

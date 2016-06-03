@@ -1,0 +1,30 @@
+<%
+	if(typeof answers == 'undefined' || answers.length == 0){
+%>
+
+<p class="alert alert-warning">Esta pergunta ainda não possui respostas.</p>
+
+<%	}else{%>
+
+	<ul class="list-group">
+		<%
+		answers.map(function(a){
+		%>
+			<li class="list-group-item clearfix" data-type="answer">
+				<div class="col-md-11">
+					<strong style="font-size: 20px;line-height: 30px;"><%=a.answer%></strong><br>
+					<small>Por <strong><%=maskIp(a.ip)%></strong> em <strong><%=a.date%></strong></small>
+				</div>
+				<div class="col-md-1 text-right">
+					<a data-id="<%=a._id%>" class="remove glyphicon glyphicon-trash btn btn-danger" alt="Remover"><span style="display:none;">Remover</span></a>
+				</div>
+
+			</li>
+		<%
+		})
+		%>
+	</ul>
+	<%
+%>
+	
+<%}%>

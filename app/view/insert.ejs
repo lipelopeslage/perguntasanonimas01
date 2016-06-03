@@ -1,0 +1,32 @@
+<% include partials/header %>
+	<div class="container">
+		<%if(typeof data!='undefined'){%>
+			<h1 class="page-header">Pergunta</h1>
+			<%=message%>
+			<a href="<%=backURL%>">Voltar</a>
+
+		<%}else if(typeof person == 'undefined'){
+			var isUpdate = typeof update != 'undefined';
+			var input = (!isUpdate) ? {name:'', age:''} : update;
+		%>
+		<div class="page-header clearfix">
+			<h1 class="pull-left">Inserir uma pergunta</h1>
+			<a href="<%=backURL%>" class="pull-right"><br><br>Voltar</a>
+		</div>
+		<form action="http://<%=request.headers.host%>/<%=(isUpdate) ? 'update' : 'insert'%>" method="POST">
+			<legend>
+				Preencha o campo abaixo com uma pergunta
+			</legend>
+			<fieldset>
+				<%if(isUpdate){%>
+					<input type="hidden" value="<%=request.params.id%>" name="_id"> 
+				<%}%>
+				<textarea class="form-control" autofocus name="question"><%=input.question%></textarea>
+			</fieldset>
+			<br>
+			<button type="submit" class="pull-right btn btn-primary"><%=buttonLabel%></button>
+			
+		</form>
+		<%}%>
+	</div>
+<% include partials/footer %>
